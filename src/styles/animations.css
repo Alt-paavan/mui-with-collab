@@ -1,0 +1,52 @@
+/**
+ * animations.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CSS-only animation helpers that complement framer-motion.
+ * JavaScript animation values live in animationConfig.ts.
+ *
+ * Add keyframes here when they are used purely via CSS classes.
+ */
+
+@keyframes reality-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.7; }
+}
+
+.reality-pulse {
+  animation: reality-pulse 4s ease-in-out infinite;
+}
+
+/* ── Light Reveal / Kitchen Spotlight keyframes ────────────────────────────── */
+
+@keyframes lightOriginIgnite {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(255, 235, 195, 0);
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 80px 30px rgba(255, 218, 140, 0.95), 0 0 180px 90px rgba(217, 119, 6, 0.45);
+  }
+  100% {
+    transform: scale(3);
+    opacity: 1;
+    box-shadow: 0 0 200px 100px rgba(255, 245, 220, 1), 0 0 400px 200px rgba(217, 119, 6, 0.6);
+  }
+}
+
+@keyframes lightConicalBeam {
+  0% {
+    opacity: 0;
+    clip-path: polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%);
+  }
+  50% {
+    opacity: 0.85;
+    clip-path: polygon(45% 0%, 55% 0%, 75% 100%, 25% 100%);
+  }
+  100% {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}

@@ -1,0 +1,164 @@
+@import "../styles/fonts.css";
+@import "../styles/variables.css";
+@import "../styles/animations.css";
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-reality-base);
+  color: #fff;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+}
+
+/* =========================================================================
+   LIGHT REVEAL — Overhead Kitchen Spotlight Animation
+   Keyframes: animations.css  |  Variable: --z-light-reveal in variables.css
+   ========================================================================= */
+
+.light-reveal-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--z-light-reveal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.light-hood-fixture {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5rem;
+  z-index: 10;
+}
+
+.light-hood-bulb {
+  width: 24px;
+  height: 12px;
+  border-radius: 0 0 12px 12px;
+  background: #FFFDF5;
+  box-shadow: 0 0 50px 25px rgba(255, 235, 175, 0.95), 0 0 120px 60px rgba(217, 119, 6, 0.5);
+  animation: lightOriginIgnite 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.light-beam-conical {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 230, 0.85) 0%,
+    rgba(254, 243, 199, 0.45) 45%,
+    rgba(250, 247, 242, 0.1) 100%
+  );
+  animation: lightConicalBeam 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.light-countertop-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 237, 200, 0.6) 0%, rgba(250, 247, 242, 0) 70%);
+}
+
+@media (max-width: 640px) {
+  .light-hood-fixture {
+    gap: 2.5rem;
+  }
+}
+
+/* =========================================================================
+   ENDLESS GRAPPLE GAME STYLES
+   ========================================================================= */
+
+.game-shell {
+  color: #f4efe5;
+  background:
+    radial-gradient(circle at 72% 12%, rgba(65, 91, 155, 0.28), transparent 32rem),
+    radial-gradient(circle at 16% 86%, rgba(10, 94, 105, 0.16), transparent 28rem),
+    #0d1530;
+}
+
+.game-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.game-display {
+  font-family: var(--font-display);
+}
+
+.hud-card {
+  background: rgba(13, 21, 48, 0.72);
+  border: 1px solid rgba(145, 168, 205, 0.25);
+  box-shadow: 0 18px 42px rgba(2, 7, 24, 0.3);
+  backdrop-filter: blur(14px);
+}
+
+.game-button {
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.game-button:hover {
+  transform: translateY(-2px);
+}
+
+.game-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.game-button:focus-visible {
+  outline: 2px solid #fa784d;
+  outline-offset: 4px;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(255, 177, 112, 0.06), transparent);
+  animation: grapple-scan 5.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes grapple-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes grapple-rise {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes grapple-scan {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+
