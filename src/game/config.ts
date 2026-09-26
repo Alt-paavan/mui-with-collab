@@ -32,7 +32,7 @@ export const GAME_CONFIG = {
     MAX_ROPE_LENGTH: 194,
     MAX_ANGULAR_VELOCITY: 3.8,
     RELEASE_FORWARD_SPEED: 112,
-    RELEASE_GRACE_SECONDS: 0.06,
+    RELEASE_GRACE_SECONDS: 0.11,
   },
   grapple: {
     MIN_SPACING: 220,
@@ -55,6 +55,22 @@ export const GAME_CONFIG = {
   camera: {
     PLAYER_LEAD: 220,
     FOLLOW_SPEED: 4,
+  },
+} as const;
+
+export const OBSTACLE_COLLISION_CONFIG = {
+  globalScale: 0.65,
+
+  shard: {
+    scale: 1,
+    paddingX: 0,
+    paddingY: 0,
+  },
+
+  drone: {
+    scale: 1,
+    paddingX: 0,
+    paddingY: 0,
   },
 } as const;
 

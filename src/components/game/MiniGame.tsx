@@ -5,6 +5,7 @@ import {
   GAME_CONFIG,
   GAME_DURATION_SECONDS,
   MAX_ATTEMPTS,
+  OBSTACLE_COLLISION_CONFIG,
 } from "@/game/config";
 import { ANIMATION_CONFIG } from "@/config/animationConfig";
 
@@ -94,7 +95,6 @@ function createWorld(width: number, height: number, attempt: number): World {
     { x: 1500, y: height * 0.25, radius: GAME_CONFIG.grapple.RADIUS, kind: "anchor", phase: 5.1 },
   ];
   const hazards: Hazard[] = [
-    { x: 760, y: height * 0.78, width: 26, height: 80, type: "shard" },
     { x: 1040, y: height * 0.25, width: 38, height: 22, type: "drone" },
     { x: 1330, y: height * 0.72, width: 30, height: 90, type: "shard" },
   ];
@@ -502,12 +502,26 @@ export function MiniGame({
     const hitHazard = (world: World, px?: number, py?: number) => {
       const cx = px ?? world.player.x;
       const cy = py ?? world.player.y;
-      const r = world.player.radius + 3; // effective collision radius
-      // Pill/capsule: sample head (cy-9) and body centre (cy+8) to match the drawn figure
+      const r = world.player.radius; // exact radius — two-point capsule provides full coverage without inflation
+      // Pill/capsule: head at cy-9 (drawn head arc centre), body at cy+4 (body rect centre)
+      // Capsule bottom reach: cy+4+13 = cy+17 ≈ visual body bottom at cy+16 → 1px contact margin only
       return world.hazards.some((hazard) => {
-        for (const testY of [cy - 9, cy + 8]) {
-          const closestX = clamp(cx, hazard.x, hazard.x + hazard.width);
-          const closestY = clamp(testY, hazard.y, hazard.y + hazard.height);
+        const typeConfig = OBSTACLE_COLLISION_CONFIG[hazard.type] ?? {
+          scale: 1,
+          paddingX: 0,
+          paddingY: 0,
+        };
+        const effectiveScale = OBSTACLE_COLLISION_CONFIG.globalScale * typeConfig.scale;
+        const effectiveWidth = Math.max(1, hazard.width * effectiveScale - typeConfig.paddingX);
+        const effectiveHeight = Math.max(1, hazard.height * effectiveScale - typeConfig.paddingY);
+
+        // Keep collision box centered inside the visual obstacle
+        const hitboxX = hazard.x + (hazard.width - effectiveWidth) / 2;
+        const hitboxY = hazard.y + (hazard.height - effectiveHeight) / 2;
+
+        for (const testY of [cy - 9, cy + 4]) {
+          const closestX = clamp(cx, hitboxX, hitboxX + effectiveWidth);
+          const closestY = clamp(testY, hitboxY, hitboxY + effectiveHeight);
           if (Math.hypot(cx - closestX, testY - closestY) < r) return true;
         }
         return false;
