@@ -7,8 +7,8 @@
  *   The UI updates automatically — no component edits needed.
  *
  * Developer quick-reference:
- *   Manual URL         → manual.url
- *   Repository URLs    → repositories[n].url
+ *   Manual poster      → manual.poster
+ *   Manual download    → manual.downloadUrl / manual.downloadFilename
  *   Registration URL   → registration.url
  *   XP param name      → registration.xpQueryParam
  *   Visit counter API  → visitCounter.endpoint
@@ -16,30 +16,17 @@
 
 export const RESOURCE_LINKS = {
   manual: {
-    title: "MUI 2026 Event Manual",
+    title: "A Guide to Install Malware on My Friends PC",
     description:
-      "Everything you need to know — schedule, challenges, judging criteria, and team guidelines.",
-    /** Replace with the actual PDF/page URL when available. */
-    url: "https://drive.google.com/file/d/1DK1hnZZTxbWDXQk9AYPbPzkUb4XE8JpE/view?usp=drivesdk",
+      "Official Event Guide & Manual authored by Team GDGC.",
+    /** Centralized poster image path — update this one value to change the poster */
+    poster: "/assets/manual-poster.jpeg",
+    /** Centralized manual download path */
+    downloadUrl: "/assets/a-guide-to-install-malware-on-my-friends-pc.pdf",
+    /** Downloaded file name */
+    downloadFilename: "a-guide-to-install-malware-on-my-friends-pc.pdf",
     available: true,
   },
-
-  repositories: [
-    {
-      id: "starter-kit",
-      label: "Starter Kit Repository",
-      description: "Base project template and boilerplate for the event.",
-      url: "#",
-      available: false,
-    },
-    {
-      id: "design-resources",
-      label: "Design Resources",
-      description: "Figma files, asset packs, and style guides.",
-      url: "#",
-      available: false,
-    },
-  ],
 
   registration: {
     title: "Register for MasterChef UI",
@@ -72,7 +59,7 @@ export const RESOURCE_LINKS = {
      *
      * The endpoint should respond with JSON: { count: number }
      */
-    endpoint: null as string | null,
+    endpoint: "/api/visit-count" as string | null,
   },
 } as const;
 

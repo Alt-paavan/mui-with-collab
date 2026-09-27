@@ -15,7 +15,6 @@
  *   MiniGame (loaded on page open)
  *   GameResult (Score & XP)
  *   ManualSection
- *   RepositoryLinks
  *   RegistrationCTA (with Reality Stone formation & background illumination)
  *   FooterVisitCounter (bottom page count)
  *
@@ -40,7 +39,6 @@ import { GameResult }             from "@/components/campaign/GameResult";
 // Phase 3 & Visual Additions
 import { ManualSection }           from "@/components/campaign/ManualSection";
 import { XPUnlockGuideCTA }         from "@/components/campaign/XPUnlockGuideCTA";
-import { RepositoryLinks }         from "@/components/campaign/RepositoryLinks";
 import { RegistrationCTA }         from "@/components/campaign/RegistrationCTA";
 import { FooterVisitCounter }       from "@/components/campaign/FooterVisitCounter";
 import { FloatingLiveCount }       from "@/components/campaign/FloatingLiveCount";
@@ -150,9 +148,6 @@ export default function Home() {
 
             {/* Event manual / free guide section */}
             <ManualSection />
-
-            {/* Repository and resources links */}
-            <RepositoryLinks />
 
             {/* External registration CTA with Reality Stone crystallization */}
             <RegistrationCTA xp={xp} />

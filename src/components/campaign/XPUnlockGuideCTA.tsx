@@ -50,7 +50,7 @@ export function XPUnlockGuideCTA() {
             lineHeight: 1.35,
           }}
         >
-          Use this XP and use it to unlock the free guide
+          As Promised Here Is The Guide To Install Malware On My Friends PC
         </h3>
 
         {/* Action Button scrolling to manual / free guide */}

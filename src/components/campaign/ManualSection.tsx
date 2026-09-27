@@ -8,84 +8,92 @@ const { sections } = ANIMATION_CONFIG;
 const { manual } = RESOURCE_LINKS;
 
 /**
- * ManualSection — event manual download slot.
+ * ManualSection — Event Guide & Manual Poster with Direct Download.
  *
- * Where do I change the manual link?
- *   → src/config/resourceLinks.ts → RESOURCE_LINKS.manual.url
- *   Also set `available: true` once the real URL is ready.
+ * The poster image and download paths are managed from one centralized place:
+ *   → src/config/resourceLinks.ts → RESOURCE_LINKS.manual
  */
 export function ManualSection() {
   return (
     <section
       id="manual"
-      className="w-full max-w-2xl mx-auto px-4 py-12"
-      aria-label="Event Manual"
+      className="w-full max-w-2xl mx-auto px-4 py-12 sm:py-16"
+      aria-label="Event Manual and Free Guide"
     >
       <motion.div
         initial={{ opacity: 0, y: sections.entranceSlide }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: sections.entranceDuration, ease: "easeOut" }}
-        className="flex flex-col gap-5"
-        style={{
-          padding: "2rem",
-          background: "rgba(40,3,3,0.4)",
-          border: "1px solid rgba(220,38,38,0.15)",
-        }}
+        className="flex flex-col items-center text-center gap-6"
       >
-        {/* Label */}
-        <p
-          className="text-xs font-bold uppercase tracking-[0.3em]"
-          style={{ fontFamily: "var(--font-mono)", color: "rgba(239,68,68,0.6)" }}
-        >
-          Event Document
-        </p>
+        {/* Section Header */}
+        <div className="flex flex-col items-center gap-2">
+          <p
+            className="text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ fontFamily: "var(--font-mono)", color: "rgba(239,68,68,0.6)" }}
+          >
+            Official Event Guide
+          </p>
+          <h2
+            className="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {manual.title}
+          </h2>
+          <p
+            className="text-xs sm:text-sm max-w-lg leading-relaxed text-red-200/60"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {manual.description}
+          </p>
+        </div>
 
-        <h2
-          className="text-xl sm:text-2xl font-bold uppercase tracking-wider"
-          style={{ fontFamily: "var(--font-display)", color: "#fff" }}
+        {/* Clickable Poster — Direct Native File Download */}
+        <motion.div
+          whileHover={{ scale: 1.018 }}
+          whileTap={{ scale: 0.985 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="w-full max-w-sm sm:max-w-md mx-auto"
         >
-          {manual.title}
-        </h2>
+          <a
+            href={manual.downloadUrl}
+            download={manual.downloadFilename}
+            aria-label={`Download ${manual.title} PDF`}
+            className="group relative block w-full rounded-xl overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ef4444] focus-visible:ring-offset-4 focus-visible:ring-offset-[#080000] cursor-pointer transition-shadow duration-300 shadow-[0_0_20px_rgba(0,0,0,0.8)] hover:shadow-[0_0_40px_rgba(239,68,68,0.35)]"
+          >
+            {/* Poster Image */}
+            <img
+              src={manual.poster}
+              alt={manual.title}
+              width={600}
+              height={850}
+              className="w-full h-auto object-cover block rounded-xl border border-red-950/60 group-hover:border-red-600/40 transition-colors duration-300"
+              loading="lazy"
+            />
 
-        <p
-          className="text-sm leading-relaxed"
-          style={{ fontFamily: "var(--font-body)", color: "rgba(252,165,165,0.6)" }}
-        >
-          {manual.description}
-        </p>
-
-        {/* Download button */}
-        <div className="mt-2">
-          {manual.available ? (
-            <a
-              href={manual.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest transition-all duration-200"
+            {/* Subtle Interactive Crimson Sheen on Hover */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
               style={{
-                fontFamily: "var(--font-display)",
-                background: "rgba(180,20,20,0.25)",
-                border: "1px solid rgba(220,38,38,0.4)",
-                color: "#fca5a5",
+                background: "radial-gradient(ellipse at center, rgba(239,68,68,0.08) 0%, transparent 70%)",
               }}
-              aria-label={`Download ${manual.title}`}
-            >
-              Download Manual
-            </a>
-          ) : (
-            <span
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest cursor-not-allowed"
-              style={{
-                fontFamily: "var(--font-display)",
-                background: "rgba(40,5,5,0.3)",
-                border: "1px solid rgba(220,38,38,0.15)",
-                color: "rgba(252,165,165,0.3)",
-              }}
-              title="Manual not yet available"
-            >
-              Coming Soon
-            </span>
-          )}
+              aria-hidden="true"
+            />
+          </a>
+        </motion.div>
+
+        {/* Action / Interaction Caption */}
+        <div className="flex items-center gap-2 mt-1">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-[#ef4444] animate-pulse"
+            aria-hidden="true"
+          />
+          <span
+            className="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-mono text-red-300/70"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            Click poster to download manual (PDF)
+          </span>
         </div>
       </motion.div>
     </section>
