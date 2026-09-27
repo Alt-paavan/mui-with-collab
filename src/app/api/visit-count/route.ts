@@ -45,8 +45,9 @@ export async function GET() {
     });
 
     if (!response.ok) {
+      const errBody = await response.text();
       return NextResponse.json(
-        { error: "Unable to retrieve analytics data." },
+        { error: "Unable to retrieve analytics data.", status: response.status, detail: errBody },
         { status: response.status }
       );
     }
