@@ -76,7 +76,7 @@ export function ClubEventHeader() {
                 color: "rgba(239,68,68,0.55)",
               }}
             >
-              In Association with Ask what to add line 79 ClubEventHeader
+              IN COLLABORATION WITH CESA
             </span>
             <p
               style={{

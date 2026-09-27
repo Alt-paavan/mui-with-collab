@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   /** Official organizing club — extracted from rulebook reference. */
   clubName: "ANANTYA GDGC",
   clubFullName:
-    "Computer Engineering Student Association & Google Developer Groups on Campus",
+    "Google Developer Groups on Campus",
 
   /** Official event name — extracted from rulebook reference. */
   eventName: "MasterChef UI",
