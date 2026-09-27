@@ -53,9 +53,24 @@ export async function GET() {
     }
 
     const data: unknown = await response.json();
+    const body = data as { data?: { pageviews?: number } };
+    const pageviews = body?.data?.pageviews;
 
-    // DEBUG — remove after inspecting
-    return NextResponse.json({ debug_raw: data });
+    if (typeof pageviews !== "number") {
+      return NextResponse.json(
+        { error: "Invalid analytics response structure." },
+        { status: 502 }
+      );
+    }
+
+    return NextResponse.json(
+      { count: BASE_COUNT + pageviews },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
+        },
+      }
+    );
   } catch {
     return NextResponse.json(
       { error: "Internal error processing visit count." },
