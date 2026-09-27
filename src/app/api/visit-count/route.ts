@@ -13,6 +13,9 @@ export const dynamic = "force-dynamic";
  *   - VERCEL_PROJECT_ID      : Vercel Project ID (e.g. prj_...)
  *   - VERCEL_TEAM_ID         : Optional Vercel Team ID (if team-owned)
  */
+/** Base count offset — displayed count = BASE_COUNT + live Vercel total */
+const BASE_COUNT = 100;
+
 export async function GET() {
   const token = process.env.VERCEL_ANALYTICS_TOKEN;
   const projectId = process.env.VERCEL_PROJECT_ID;
@@ -58,7 +61,7 @@ export async function GET() {
     }
 
     return NextResponse.json(
-      { count: data.total },
+      { count: BASE_COUNT + data.total },
       {
         headers: {
           "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
