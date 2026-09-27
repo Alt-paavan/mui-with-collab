@@ -31,7 +31,7 @@ export function RegistrationCTA({ xp }: RegistrationCTAProps) {
    * append the XP as a query parameter.
    */
   const buildRegistrationUrl = (): string => {
-    if (!registration.available || registration.url === "#") return "#";
+    if (!registration.available) return "#";
     if (registration.xpQueryParam && xp > 0) {
       const url = new URL(registration.url);
       url.searchParams.set(registration.xpQueryParam, String(xp));
