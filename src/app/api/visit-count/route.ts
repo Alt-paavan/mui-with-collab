@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
  * from the official Vercel Web Analytics API.
  *
  * Requirements (set in .env.local or Vercel Environment Variables):
- *   - VERCEL_ANALYTICS_TOKEN : Vercel Access Token (Bearer)
+ *   - ANALYTICS_TOKEN    : Vercel Access Token (Bearer) — avoid VERCEL_ prefix
  *   - VERCEL_PROJECT_ID      : Vercel Project ID (e.g. prj_...)
  *   - VERCEL_TEAM_ID         : Optional Vercel Team ID (if team-owned)
  */
@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 const BASE_COUNT = 100;
 
 export async function GET() {
-  const token = process.env.VERCEL_ANALYTICS_TOKEN;
+  const token = process.env.ANALYTICS_TOKEN;
   const projectId = process.env.VERCEL_PROJECT_ID;
   const teamId = process.env.VERCEL_TEAM_ID;
 
