@@ -32,7 +32,7 @@ export function ManualSection() {
             className="text-xs font-bold uppercase tracking-[0.3em]"
             style={{ fontFamily: "var(--font-mono)", color: "rgba(239,68,68,0.6)" }}
           >
-            Official Event Guide
+            
           </p>
           <h2
             className="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white"

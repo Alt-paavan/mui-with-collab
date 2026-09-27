@@ -18,7 +18,7 @@ export const RESOURCE_LINKS = {
   manual: {
     title: "A Guide to Install Malware on My Friends PC",
     description:
-      "Official Event Guide & Manual authored by Team GDGC.",
+      "Manual authored by Team GDGC.",
     /** Centralized poster image path — update this one value to change the poster */
     poster: "/assets/manual-poster.jpeg",
     /** Centralized manual download path */
