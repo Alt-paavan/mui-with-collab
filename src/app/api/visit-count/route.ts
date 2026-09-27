@@ -52,23 +52,10 @@ export async function GET() {
       );
     }
 
-    const data: { total?: number } = await response.json();
+    const data: unknown = await response.json();
 
-    if (typeof data.total !== "number") {
-      return NextResponse.json(
-        { error: "Invalid analytics response structure." },
-        { status: 502 }
-      );
-    }
-
-    return NextResponse.json(
-      { count: 100 + data.total },
-      {
-        headers: {
-          "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
-        },
-      }
-    );
+    // DEBUG — remove after inspecting
+    return NextResponse.json({ debug_raw: data });
   } catch {
     return NextResponse.json(
       { error: "Internal error processing visit count." },
