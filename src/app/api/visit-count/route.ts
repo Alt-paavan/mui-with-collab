@@ -61,7 +61,7 @@ export async function GET() {
     }
 
     return NextResponse.json(
-      { count: BASE_COUNT + data.total },
+      { count: 100 + data.total },
       {
         headers: {
           "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",

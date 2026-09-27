@@ -33,8 +33,8 @@ export const RESOURCE_LINKS = {
     description:
       "Claim your place in the event. Bring your XP and your ideas.",
     /** Replace with the actual external registration URL when available. */
-    url: "#",
-    available: false,
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSeXkTfnEDepxaukKpvyypXXXWCqCFg3FMezULDqYWdISS-qQQ/viewform?usp=publish-editor",
+    available: true,
 
     /**
      * XP query parameter name.
